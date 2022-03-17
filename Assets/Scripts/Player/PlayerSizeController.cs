@@ -15,28 +15,33 @@ public class PlayerSizeController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
+        if(other.transform.GetComponent<ColorController>())//I checked if the triggered object has ColorController
+        {
+            if (!other.transform.GetComponent<ColorController>().IsGate)
+            {
+                if (transform.GetComponent<ColorController>().ColorType == other.transform.GetComponent<ColorController>().ColorType)
+                {
+                    SizeUp();
+                    Destroy(other.gameObject);
+                }
+                if (transform.GetComponent<ColorController>().ColorType != other.transform.GetComponent<ColorController>().ColorType)
+                {
+                    SizeDown();
+                    Destroy(other.gameObject);
+                }
+            }
+            else
+            {
+                transform.GetComponent<ColorController>().ColorType = other.transform.GetComponent<ColorController>().ColorType;
+                transform.GetComponent<ColorController>().ChangeBodyColor(other.transform.GetComponent<ColorController>().ColorType);
+            }
+        }
         if(other.transform.CompareTag("Coin"))
         {
 
         }
-        else if(!other.transform.GetComponent<ColorController>().IsGate)
-        {
-            if (transform.GetComponent<ColorController>().ColorType == other.transform.GetComponent<ColorController>().ColorType)
-            {
-                SizeUp();
-                Destroy(other.gameObject);
-            }
-            if (transform.GetComponent<ColorController>().ColorType != other.transform.GetComponent<ColorController>().ColorType)
-            {
-                SizeDown();
-                Destroy(other.gameObject);
-            }
-        }
-        else
-        {
-            transform.GetComponent<ColorController>().ColorType = other.transform.GetComponent<ColorController>().ColorType;
-            transform.GetComponent<ColorController>().ChangeBodyColor(other.transform.GetComponent<ColorController>().ColorType);
-        }
+        
     }
     public void SizeUp()
     {

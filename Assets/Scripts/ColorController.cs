@@ -21,7 +21,9 @@ public class ColorController : MonoBehaviour
     [SerializeField]
     private Color32[] bodyColor;    //red-0     green-1     blue-2
     [SerializeField]
-    private GameObject enemyBody;
+    private GameObject body;
+
+    private UIController UIController;
     public ColorTypes ColorType
     {
         get
@@ -43,6 +45,7 @@ public class ColorController : MonoBehaviour
 
     private void Start()
     {
+        UIController = GameObject.FindObjectOfType<UIController>();
         ChangeBodyColor(colorType);
     }
 
@@ -51,13 +54,16 @@ public class ColorController : MonoBehaviour
         switch (colorType)
         {
             case ColorTypes.Red:
-                enemyBody.GetComponent<Renderer>().material.color = bodyColor[0];
+                body.GetComponent<Renderer>().material.color = bodyColor[0];
+                UIController.stickmanImage.color = new Color32(bodyColor[0].r, bodyColor[0].g, bodyColor[0].b, 255);
                 break;
             case ColorTypes.Green:
-                enemyBody.GetComponent<Renderer>().material.color = bodyColor[1];
+                body.GetComponent<Renderer>().material.color = bodyColor[1];
+                UIController.stickmanImage.color = new Color32(bodyColor[1].r, bodyColor[1].g, bodyColor[1].b, 255);
                 break;
             case ColorTypes.Blue:
-                enemyBody.GetComponent<Renderer>().material.color = bodyColor[2];
+                body.GetComponent<Renderer>().material.color = bodyColor[2];
+                UIController.stickmanImage.color = new Color32(bodyColor[2].r, bodyColor[2].g, bodyColor[2].b, 255);
                 break;
             default:
                 break;
