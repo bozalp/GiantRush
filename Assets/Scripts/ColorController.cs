@@ -3,56 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace ColorController
+
+public enum ColorTypes
 {
-    public enum ColorTypes
+    Red,
+    Green,
+    Blue
+}
+
+public class ColorController : MonoBehaviour
+{
+    [SerializeField]
+    private ColorTypes colorType;
+
+    [SerializeField]
+    private Color32 bodyColor;
+    [SerializeField]
+    private GameObject enemyBody;
+    public ColorTypes ColorType
     {
-        Red,
-        Green,
-        Blue
+        get
+        {
+            return colorType;
+        }
+        set
+        {
+            colorType = value;
+        }
+    }
+    private void Start()
+    {
+        ChangeBodyColor();
     }
 
-    public class ColorController : MonoBehaviour
+    private void ChangeBodyColor()
     {
-        [SerializeField]
-        private ColorTypes colorType;
-
-        [SerializeField]
-        private Color32 bodyColor;
-        [SerializeField]
-        private GameObject enemyBody;
-        public ColorTypes ColorType
+        switch (ColorType)
         {
-            get
-            {
-               return colorType;
-            }
-            set
-            {
-                colorType = value;
-            }
-        }
-        private void Start()
-        {
-            ChangeBodyColor();
-        }
-
-        private void ChangeBodyColor()
-        {
-            switch (ColorType)
-            {
-                case ColorTypes.Red:
-                    enemyBody.GetComponent<Renderer>().material.color = bodyColor;
-                    break;
-                case ColorTypes.Green:
-                    enemyBody.GetComponent<Renderer>().material.color = bodyColor;
-                    break;
-                case ColorTypes.Blue:
-                    enemyBody.GetComponent<Renderer>().material.color = bodyColor;
-                    break;
-                default:
-                    break;
-            }
+            case ColorTypes.Red:
+                enemyBody.GetComponent<Renderer>().material.color = bodyColor;
+                break;
+            case ColorTypes.Green:
+                enemyBody.GetComponent<Renderer>().material.color = bodyColor;
+                break;
+            case ColorTypes.Blue:
+                enemyBody.GetComponent<Renderer>().material.color = bodyColor;
+                break;
+            default:
+                break;
         }
     }
 }
