@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 7483526934862777172}
   - component: {fileID: 7483526934862777173}
   - component: {fileID: 7483526934862777175}
-  - component: {fileID: 7483526934862777174}
+  - component: {fileID: 1352075897814811582}
   m_Layer: 0
   m_Name: Enemy-Green
   m_TagString: Untagged
@@ -282,7 +282,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &7483526934862777174
+--- !u!114 &1352075897814811582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -295,9 +295,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorType: 1
+  isGate: 0
   bodyColor:
-    serializedVersion: 2
+  - serializedVersion: 2
+    rgba: 255
+  - serializedVersion: 2
     rgba: 633609
+  - serializedVersion: 2
+    rgba: 16747264
   enemyBody: {fileID: 7483526936672750691}
 --- !u!1 &7483526934918613489
 GameObject:

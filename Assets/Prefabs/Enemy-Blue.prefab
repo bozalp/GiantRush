@@ -503,9 +503,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorType: 2
+  isGate: 0
   bodyColor:
-    serializedVersion: 2
-    rgba: 16759808
+  - serializedVersion: 2
+    rgba: 255
+  - serializedVersion: 2
+    rgba: 633609
+  - serializedVersion: 2
+    rgba: 16747264
   enemyBody: {fileID: 1069508260019779213}
 --- !u!1 &1069508260351337321
 GameObject:

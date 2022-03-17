@@ -15,15 +15,23 @@ public class PlayerSizeController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(transform.GetComponent<ColorController>().ColorType == other.transform.GetComponent<ColorController>().ColorType)
+        if(!other.transform.GetComponent<ColorController>().IsGate)
         {
-            SizeUp();
-            Destroy(other.gameObject);
+            if (transform.GetComponent<ColorController>().ColorType == other.transform.GetComponent<ColorController>().ColorType)
+            {
+                SizeUp();
+                Destroy(other.gameObject);
+            }
+            if (transform.GetComponent<ColorController>().ColorType != other.transform.GetComponent<ColorController>().ColorType)
+            {
+                SizeDown();
+                Destroy(other.gameObject);
+            }
         }
-        if (transform.GetComponent<ColorController>().ColorType != other.transform.GetComponent<ColorController>().ColorType)
+        else
         {
-            SizeDown();
-            Destroy(other.gameObject);
+            transform.GetComponent<ColorController>().ColorType = other.transform.GetComponent<ColorController>().ColorType;
+            transform.GetComponent<ColorController>().ChangeBodyColor(other.transform.GetComponent<ColorController>().ColorType);
         }
     }
     public void SizeUp()
