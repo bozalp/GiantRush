@@ -15,7 +15,11 @@ public class PlayerSizeController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(!other.transform.GetComponent<ColorController>().IsGate)
+        if(other.transform.CompareTag("Coin"))
+        {
+
+        }
+        else if(!other.transform.GetComponent<ColorController>().IsGate)
         {
             if (transform.GetComponent<ColorController>().ColorType == other.transform.GetComponent<ColorController>().ColorType)
             {
