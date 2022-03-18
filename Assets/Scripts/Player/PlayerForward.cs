@@ -9,7 +9,7 @@ public class PlayerForward : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.instance.isStart)
+        if(!GameManager.instance.isFinish && GameManager.instance.isStart)
             GoForward();
     }
 

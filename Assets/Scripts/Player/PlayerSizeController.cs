@@ -3,63 +3,75 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class PlayerSizeController : MonoBehaviour
+namespace Player
 {
-    [SerializeField]
-    private float sizeValue;
-    private Vector3 bodyScale;
-    private UIController UIController;
-
-    private void Start()
+    public class PlayerSizeController : MonoBehaviour
     {
-        DOTween.Init();
-        UIController = GameObject.FindObjectOfType<UIController>();
-        bodyScale = transform.localScale;
-    }
+        [SerializeField]
+        private float sizeValue;
+        private Vector3 bodyScale;
+        private UIController UIController;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-        if(other.transform.GetComponent<ColorController>())//I checked if the triggered object has <ColorController>
+        private void Start()
         {
-            if (!other.transform.GetComponent<ColorController>().IsGate)
+            DOTween.Init();
+            UIController = GameObject.FindObjectOfType<UIController>();
+            bodyScale = transform.localScale;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+
+            if (other.transform.GetComponent<ColorController>())//I checked if the triggered object has <ColorController>
             {
-                if (transform.GetComponent<ColorController>().ColorType == other.transform.GetComponent<ColorController>().ColorType)
+                if (!other.transform.GetComponent<ColorController>().IsGate)
                 {
-                    SizeUp();
-                    UIController.StickmanCount += 1;
-                    Destroy(other.gameObject);
-                }
-                if (transform.GetComponent<ColorController>().ColorType != other.transform.GetComponent<ColorController>().ColorType)
-                {
-                    if(UIController.StickmanCount >= 1)
+                    if (transform.GetComponent<ColorController>().ColorType == other.transform.GetComponent<ColorController>().ColorType)
                     {
-                        UIController.StickmanCount -= 1;
-                        SizeDown();
-                    }                   
-                    Destroy(other.gameObject);
+                        SizeUp();
+                        UIController.StickmanCount += 1;
+                        Destroy(other.gameObject);
+                    }
+                    if (transform.GetComponent<ColorController>().ColorType != other.transform.GetComponent<ColorController>().ColorType)
+                    {
+                        if (UIController.StickmanCount >= 1)
+                        {
+                            UIController.StickmanCount -= 1;
+                            SizeDown();
+                        }
+                        Destroy(other.gameObject);
+                    }
+                }
+                else
+                {
+                    transform.GetComponent<ColorController>().ColorType = other.transform.GetComponent<ColorController>().ColorType;
+                    transform.GetComponent<ColorController>().ChangeBodyColor(other.transform.GetComponent<ColorController>().ColorType);
                 }
             }
-            else
+            if (other.transform.CompareTag("Coin"))
             {
-                transform.GetComponent<ColorController>().ColorType = other.transform.GetComponent<ColorController>().ColorType;
-                transform.GetComponent<ColorController>().ChangeBodyColor(other.transform.GetComponent<ColorController>().ColorType);
+                UIController.CoinCount += 1;
+                Destroy(other.gameObject);
             }
+            if (other.transform.CompareTag("Finish"))
+            {
+                GameManager.instance.isFinish = true;
+            }
+
         }
-        if(other.transform.CompareTag("Coin"))
+        public void SizeUp()
         {
-            UIController.CoinCount += 1;
+            transform.localScale += Vector3.one * sizeValue;
+            //bodyScale = new Vector3(bodyScale.x + sizeValue, bodyScale.y + sizeValue, bodyScale.z + sizeValue);
+            
+            //transform.DOScale(bodyScale, .1f);
+            ////transform.localScale = new Vector3(bodyScale.x + sizeValue, bodyScale.y + sizeValue, bodyScale.z + sizeValue);
+            //bodyScale = transform.localScale;
         }
-        
-    }
-    public void SizeUp()
-    {
-        transform.DOScale(new Vector3(bodyScale.x + sizeValue, bodyScale.y + sizeValue, bodyScale.z + sizeValue), .5f);
-        bodyScale = transform.localScale;
-    } 
-    public void SizeDown()
-    {
-        transform.DOScale(new Vector3(bodyScale.x - sizeValue, bodyScale.y - sizeValue, bodyScale.z - sizeValue), .5f);
-        bodyScale = transform.localScale;
+        public void SizeDown()
+        {
+            transform.localScale -= Vector3.one * sizeValue;
+           // bodyScale = transform.localScale;
+        }
     }
 }
