@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject startPanel;
+    private GameObject startPanel, wonPanel;
     public Image stickmanImage;
     [SerializeField]
     private TextMeshProUGUI stickmanCountTxt, coinTxt;
@@ -41,5 +42,13 @@ public class UIController : MonoBehaviour
     public void StartPanelVisible()
     {
         startPanel.SetActive(false);
+    }
+    public void ShowWonPanel()
+    {
+        wonPanel.SetActive(true);
+    }
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(0);
     }
 }

@@ -33,5 +33,9 @@ public class AnimationController : MonoBehaviour
     {
         animator.SetTrigger("Shot");
     }
+    public void StartDanceAnimation()
+    {
+        animator.SetTrigger("Dance");
+    }
     #endregion
 }

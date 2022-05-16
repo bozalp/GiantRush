@@ -55,13 +55,15 @@ namespace Player
             }
             if (other.transform.CompareTag("Wall"))
             {
-                other.GetComponent<BreakWall>().BreakAllWall();
+                AnimationController.instance.StartShotAnimation();
+                other.GetComponent<BreakWall>().StartCoroutine(other.GetComponent<BreakWall>().BreakAllWall());
             }
             if (other.transform.CompareTag("Finish"))
             {
+                UIController.ShowWonPanel();
                 GameManager.instance.gameStates = GameStates.Won;
+                AnimationController.instance.StartDanceAnimation();
             }
-
         }
         public void SizeUp()
         {
