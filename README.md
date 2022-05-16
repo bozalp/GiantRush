@@ -1,3 +1,3 @@
 # GiantRush
-<a href="https://play.google.com/store/apps/details?id=com.hypercarrot.giantrush&hl=tr&gl=US">Game link</a><br><br>
-<b>Not completed yet. Video will be added when complete.</b><br>
+<h3><a href="https://youtube.com/shorts/FrG7NaMPAao" target="_blank">Game play video link</a></h3>
+
