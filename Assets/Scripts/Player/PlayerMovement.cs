@@ -12,11 +12,10 @@ namespace Player
 
         private void Update()
         {
-            if(!GameManager.instance.isFinish && GameManager.instance.isStart)
+            if(GameManager.instance.gameStates == GameStates.Started && GameManager.instance.gameStates != GameStates.Won && GameManager.instance.gameStates != GameStates.Failed)
             {
                 Swipe();
                 MoveHorizontal();
-                SwipeOnKeyboard();
             }
         }
         private void MoveHorizontal()
@@ -51,17 +50,6 @@ namespace Player
             else
             {
                 inputDrag = Vector3.zero;
-            }
-        }
-        private void SwipeOnKeyboard()
-        {
-            if (Input.GetKey(KeyCode.A))
-            {
-                transform.localPosition += new Vector3(-swipeSpeed * Time.deltaTime, 0, 0);
-            }
-            if (Input.GetKey(KeyCode.D))
-            {
-                transform.localPosition += new Vector3(swipeSpeed * Time.deltaTime, 0, 0);
             }
         }
     }

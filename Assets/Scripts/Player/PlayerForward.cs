@@ -9,7 +9,7 @@ public class PlayerForward : MonoBehaviour
 
     private void Update()
     {
-        if(!GameManager.instance.isFinish && GameManager.instance.isStart)
+        if (GameManager.instance.gameStates == GameStates.Started && GameManager.instance.gameStates != GameStates.Won && GameManager.instance.gameStates != GameStates.Failed)
             GoForward();
     }
 

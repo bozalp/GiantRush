@@ -14,9 +14,9 @@ public class CameraManager : MonoBehaviour
     }
     private void ChangeCamera()
     {
-        if (!GameManager.instance.isStart && Input.GetKeyDown(KeyCode.Mouse0))
+        if (GameManager.instance.gameStates != GameStates.Started && Input.GetKeyDown(KeyCode.Mouse0))
         {
-            GameManager.instance.isStart = true;
+            GameManager.instance.gameStates = GameStates.Started;
             AnimationController.instance.StartRunAnimation();
             UIController.StartPanelVisible();
             startCamera.SetActive(false);

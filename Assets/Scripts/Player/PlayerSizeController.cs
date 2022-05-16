@@ -53,25 +53,23 @@ namespace Player
                 UIController.CoinCount += 1;
                 Destroy(other.gameObject);
             }
+            if (other.transform.CompareTag("Wall"))
+            {
+                other.GetComponent<BreakWall>().BreakAllWall();
+            }
             if (other.transform.CompareTag("Finish"))
             {
-                GameManager.instance.isFinish = true;
+                GameManager.instance.gameStates = GameStates.Won;
             }
 
         }
         public void SizeUp()
         {
             transform.localScale += Vector3.one * sizeValue;
-            //bodyScale = new Vector3(bodyScale.x + sizeValue, bodyScale.y + sizeValue, bodyScale.z + sizeValue);
-            
-            //transform.DOScale(bodyScale, .1f);
-            ////transform.localScale = new Vector3(bodyScale.x + sizeValue, bodyScale.y + sizeValue, bodyScale.z + sizeValue);
-            //bodyScale = transform.localScale;
         }
         public void SizeDown()
         {
             transform.localScale -= Vector3.one * sizeValue;
-           // bodyScale = transform.localScale;
         }
     }
 }
